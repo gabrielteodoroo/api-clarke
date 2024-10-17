@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /usr/src
+WORKDIR /usr/src/app
 
 COPY package*.json ./
 
@@ -15,4 +15,4 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main.js"]  # Modificado para apontar para o arquivo correto
