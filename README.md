@@ -68,6 +68,7 @@ O servidor será iniciado em http://localhost:5000
 ### Acessando a API em Produção
 
 A API também está disponível em um ambiente de produção através do Render. Para acessá-la, utilize a seguinte URL: https://api-clarke.onrender.com
+**Observação:** Quando a API não está em uso, ela pode pausar automaticamente. Após acessar o link, pode ser necessário aguardar alguns segundos para que a API reinicie e fique disponível novamente.
 
 ### Rotas disponíveis
 
