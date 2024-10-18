@@ -1,73 +1,116 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API para listagem de fornecedores de energia - Clarke Energia
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Esta API foi desenvolvida para facilitar o processo de escolha do fornecedor de energia pelos usuários. Com ela, os usuários podem informar seu consumo de energia e receber recomendações personalizadas de fornecedores com base em suas necessidades específicas.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requisitos
 
-## Description
+Antes de iniciar, certifique-se de ter os seguintes requisitos instalados em sua máquina:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Node.js**: Versão 18.x ou superior [Node.js Download](https://nodejs.org/)
+- **npm**: Gerenciador de pacotes padrão do Node.js
+- **Docker**: Para rodar a aplicação e o banco de dados em containers [Docker Download](https://www.docker.com/)
 
-## Installation
+## Tecnologias Utilizadas
+
+As principais tecnologias utilizadas para o desenvolvimento desta API são:
+
+- **Node.js**: Runtime JavaScript
+- **NestJS**: Framework de desenvolvimento de APIs
+- **TypeScript**: Superconjunto do JavaScript que adiciona tipagem estática
+- **Jest**: Framework de testes
+- **Prisma**: ORM (Object-Relational Mapping)
+- **PostgreSQL**: Banco de dados relacional (rodando em um container Docker)
+- **Docker**: Containerização do banco de dados
+
+## Instalação
+
+1. Clone o repositório para a sua máquina local:
+
+   ```bash
+   git clone https://github.com/gabrielteodoroo/api-clarke
+   ```
+2. Acesse o diretório do projeto:
+
+   ```bash
+   cd api-clarke
+   ```
+3. Instale as dependências:
+
+   ```bash
+   npm install 
+   ```
+4. Suba o container do banco de dados PostgreSQL e da aplicação com Docker:
+
+      ```bash
+      docker-compose up -d
+      ```
+
+5. Renomeie o arquivo `.env-example` para `.env`
+
+6. Configure o banco de dados executando as migrações:
+
+    ```base
+    npx prisma migrate dev
+    ```
+
+## Como Usar
+
+### Executando o servidor de desenvolvimento
+
+Para iniciar a API em modo de desenvolvimento, utilize o comando:
+
+   ```bash
+   npm run start:dev
+   ```
+
+O servidor será iniciado em http://localhost:5000
+
+### Acessando a API em Produção
+
+A API também está disponível em um ambiente de produção através do Render. Para acessá-la, utilize a seguinte URL: https://api-clarke.onrender.com
+
+### Rotas disponíveis
+
+#### Suppliers
+
++ **GET** /suppliers
+**Descrição:** Retorna a lista de fornecedores recomendados com base no consumo de energia informado.
+
+**Parâmetros de query:**
++ **kwh (obrigatório):**  O consumo de energia em kilowatt-hora (kWh) do usuário. Deve ser um valor numérico.
+
+**Exemplo de uso:**
 
 ```bash
-$ npm install
+GET /suppliers?kwh=500
 ```
 
-## Running the app
 
-```bash
-# development
-$ npm run start
+**Respostas:**
++ **200 OK:** Retorna a lista de fornecedores com base no consumo.
++ **400 Bad Request:** Caso o parâmetro kwh não seja fornecido ou não seja numérico.
 
-# watch mode
-$ npm run start:dev
+## Como testar
 
-# production mode
-$ npm run start:prod
-```
+### Testes dos casos de uso
 
-## Test
+Os testes de casos de uso foram implementados utilizando Jest. Para rodar os testes, utilize o comando:
 
-```bash
-# unit tests
-$ npm run test
+   ```bash
+   npm run test
+   ```
 
-# e2e tests
-$ npm run test:e2e
+### Testes E2E
+Os testes End-to-End (E2E), que testam os controllers da aplicação, podem ser executados com o comando:
 
-# test coverage
-$ npm run test:cov
-```
+   ```bash
+   npm run test:e2e
+   ```
 
-## Support
+## Contribuindo
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+1. Faça fork do projeto
+2. Crie uma nova branch com sua feature: `git checkout -b minha-feature`.
+3. Faça commit das suas mudanças: `git commit -m 'Minha nova feature'`.
+4. Envie para a branch principal: `git push origin minha-feature`.
+5. Abra um Pull Request.
