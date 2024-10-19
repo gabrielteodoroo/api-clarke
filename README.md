@@ -53,6 +53,12 @@ As principais tecnologias utilizadas para o desenvolvimento desta API são:
     npx prisma migrate dev
     ```
 
+7. Após configurar o banco de dados e executar as migrações, você precisa rodar o comando para popular o banco com os fornecedores. Para isso, execute o seguinte comando:
+
+    ```base
+    npm run seed
+    ```
+
 ## Como Usar
 
 ### Executando o servidor de desenvolvimento
