@@ -44,7 +44,7 @@ async function main() {
         costPerKwh: 0.55,
         minKwhLimit: 400,
         totalClients: 1200,
-        averageRating: 4.3,
+        averageRating: 3.0,
       },
       {
         name: 'Light',
@@ -74,7 +74,7 @@ async function main() {
         costPerKwh: 0.58,
         minKwhLimit: 700,
         totalClients: 1700,
-        averageRating: 4.1,
+        averageRating: 5.0,
       },
       {
         name: 'Copel',
@@ -94,7 +94,7 @@ async function main() {
         costPerKwh: 0.52,
         minKwhLimit: 900,
         totalClients: 2700,
-        averageRating: 4.7,
+        averageRating: 5.0,
       },
       {
         name: 'Ceará Energia',
